@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
 <main class="container">
     <div class="text-center">
       <h1>Agende o atendimento do seu pet 🐾</h1>
@@ -31,17 +30,18 @@
             <select name="especie" class="form-control">
               <option value="cachorro">Cachorro</option>
               <option value="gato">Gato</option>
-              <option value="gato">Outro</option>
+              <option value="outro">Outro</option>
             </select>
           </div>
 
           <div class="form-group">
             <label>Sexo</label>
             <div style="display: flex; gap: 10px;">
-                <button type="button" class="btn btn-primary" style="flex: 1;" onclick="document.getElementById('sexoPet').value = 'macho'">Macho</button>
-                <button type="button" class="btn" style="flex: 1; border: 1px solid var(--border);" onclick="document.getElementById('sexoPet').value = 'femea'">Fêmea</button>
-                <button type="button" class="btn" style="flex: 1; border: 1px solid var(--border);" onclick="document.getElementById('sexoPet').value = 'nao_identificado'">Não identificado</button>
-                <input type="hidden" name="sexo" value="macho"> </div>
+                <button type="button" class="btn btn-primary btn-sexo" style="flex: 1;" onclick="selecionarSexo('macho', this)">Macho</button>
+                <button type="button" class="btn btn-sexo" style="flex: 1; border: 1px solid var(--border);" onclick="selecionarSexo('femea', this)">Fêmea</button>
+                <button type="button" class="btn btn-sexo" style="flex: 1; border: 1px solid var(--border);" onclick="selecionarSexo('nao_identificado', this)">Não identificado</button>
+                <input type="hidden" name="sexo" id="sexoPet" value="macho"> 
+            </div>
           </div>
 
           <div class="form-group">
@@ -119,12 +119,24 @@
       })
       .then(resposta => {
         if(resposta.ok) {
-          window.location.href = '/confirmacao.html';
+          window.location.href = '/confirmacao';
         } else {
-          alert('Ops! um problema ao salvar no banco.');
+          alert('Ops! você deve preencher todos os campos.');
         }
       });
     });
+
+  function selecionarSexo(valorSexo, elementoClicado) {
+    document.getElementById('sexoPet').value = valorSexo;
+    const todosBotoes = document.querySelectorAll('.btn-sexo');
+    todosBotoes.forEach(botao => {
+        botao.classList.remove('btn-primary');
+        botao.style.border = '1px solid var(--border)'; 
+    });
+
+    elementoClicado.classList.add('btn-primary');
+    elementoClicado.style.border = 'none';
+  }
 </script>
 </body>
 </html>
