@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamento - PetShop Carinho</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<main class="container">
+    <div class="text-center">
+      <h1>Agende o atendimento do seu pet 🐾</h1>
+      <p>Preencha as informações abaixo. É rapidinho!</p>
+    </div>
+
+    <form action="/api/agendamentos" method="POST" id="form-agendamento">
+      <div class="booking-grid">
+        
+        <div class="card">
+          <h3 style="margin-bottom: 1rem;">🐶 Informações do Pet</h3>
+          
+          <div class="form-group">
+            <label>Nome do pet</label>
+            <input type="text" name="nomePet" id="nomePet" class="form-control" placeholder="Ex: Thor" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Espécie</label>
+            <select name="especie" class="form-control">
+              <option value="cachorro">Cachorro</option>
+              <option value="gato">Gato</option>
+              <option value="gato">Outro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Sexo</label>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn btn-primary" style="flex: 1;" onclick="document.getElementById('sexoPet').value = 'macho'">Macho</button>
+                <button type="button" class="btn" style="flex: 1; border: 1px solid var(--border);" onclick="document.getElementById('sexoPet').value = 'femea'">Fêmea</button>
+                <button type="button" class="btn" style="flex: 1; border: 1px solid var(--border);" onclick="document.getElementById('sexoPet').value = 'nao_identificado'">Não identificado</button>
+                <input type="hidden" name="sexo" value="macho"> </div>
+          </div>
+
+          <div class="form-group">
+            <label>Idade (anos)</label>
+            <input type="number" name="idade" class="form-control" placeholder="Ex: 3">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom: 1rem;">👤 Informações do Tutor</h3>
+          
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" name="nomeTutor" class="form-control" placeholder="Ex: Maria Silva" required>
+          </div>
+
+          <div class="form-group">
+            <label>CPF</label>
+            <input type="text" name="cpf" class="form-control" placeholder="000.000.000-00">
+          </div>
+
+          <h3 style="margin: 1.5rem 0 1rem 0;">Escolha o serviço</h3>
+          
+          <div class="service-selector" onclick="selecionarServico('banho', this)">
+            <span>🛁 Banho</span> <strong>R$ 50</strong>
+          </div>
+          <div class="service-selector" onclick="selecionarServico('tosa', this)">
+            <span>✂️ Tosa</span> <strong>R$ 60</strong>
+          </div>
+          <div class="service-selector" onclick="selecionarServico('combo', this)">
+            <span>💖 Banho e Tosa</span> <strong>R$ 100</strong>
+          </div>
+          <input type="hidden" name="servicoEscolhido" id="servicoEscolhido" value="" >
+
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 2rem;">
+        <button type="submit" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;">Agendar agora 🐾</button>
+      </div>
+    </form>
+  </main>
+
+<script>
+    function selecionarServico(nomeDoServico, elementoClicado) {
+        document.getElementById('servicoEscolhido').value = nomeDoServico;
+        const todasCaixas = document.querySelectorAll('.service-selector');
+        todasCaixas.forEach(caixa => {
+            caixa.style.background = 'transparent';
+            caixa.style.borderColor = '#e2e8f0'; 
+        });
+        elementoClicado.style.background = '#ffedd5'; 
+        elementoClicado.style.borderColor = '#f97316'; 
+    }
+
+    const formulario = document.getElementById('form-agendamento');
+
+    formulario.addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      const dadosDoPet = {
+        nome: document.getElementById('nomePet').value,
+        especie: document.querySelector('select[name="especie"]').value,
+        sexo: document.getElementById('sexoPet').value,
+        idade: document.querySelector('input[name="idade"]').value,
+        ID_tutor: 1 
+      };
+
+      fetch('http://localhost:3000/pets', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dadosDoPet)
+      })
+      .then(resposta => {
+        if(resposta.ok) {
+          window.location.href = '/confirmacao.html';
+        } else {
+          alert('Ops! um problema ao salvar no banco.');
+        }
+      });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>PetShop Carinho</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <header>
+
+    <div class="logo">
+
+      <img src="icone-pata.png" alt="Patinha" width="24">
+
+      PetShop Carinho
+
+    </div>
+
+    <nav>
+
+      <a href="#servicos">Serviços</a>
+
+      <a href="#equipe">Equipe</a>
+
+    </nav>
+
+  </header>
+
+
+
+  <main class="container hero-section">
+
+    <div class="hero-content">
+
+      <span class="badge" style="background: var(--turquoise); color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">✨ Agendamento online rápido e fácil</span>
+
+      
+
+      <h1>Cuide do seu <span class="orange">pet</span> com <span class="turquoise">carinho</span> e quem entende de verdade. 🐶🐱</h1>
+
+      <p>Banho, tosa ou o pacote completo — feito por profissionais apaixonados por animais. Agende em segundos e deixe seu melhor amigo cheirosinho e feliz.</p>
+
+      
+
+      <div style="margin-top: 2rem;">
+
+        <button class="btn btn-primary" onclick="window.location.href='/agendamento'">Faça seu agendamento &rarr;</button>
+
+        <button class="btn btn-secondary">Ver serviços</button>
+
+      </div>
+
+
+
+    <div class="hero-cards">
+
+        <div class="card service-card">
+          <img src="icone-banheira.webp" alt="Banho" width="30">
+          Banho <br> <span>R$ 50</span>
+        </div>
+
+        <div class="card service-card">
+          <img src="icone-tesoura.png" alt="Tosa" width="30">
+          Tosa <br> <span>R$ 60</span>
+        </div>
+
+        <div class="card service-card">
+          <img src="icone-geral.png" alt="Banho + Tosa" width="30">
+          Banho e Tosa <br> <span>R$ 100</span>
+        </div>
+    </div>
+
+</div>
+
+
+
+    <div class="card login-card">
+
+      <h3 style="text-align: center; margin-bottom: 0.5rem;">🔒 Área do Funcionário</h3>
+
+      <p style="text-align: center; font-size: 0.8rem; color: var(--muted-foreground);">Faça login para gerenciar agendamentos</p>
+
+      
+
+      <form action="/login-funcionario" method="POST">
+
+        <div class="form-group">
+
+          <label>E-mail</label>
+
+          <input type="email" name="email" class="form-control" placeholder="funcionario@gmail.com" required>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Senha</label>
+
+          <input type="password" name="senha" class="form-control" placeholder="********" required>
+
+        </div>
+
+        <button type="submit" class="btn btn-turquoise" style="width: 100%; margin-top: 1rem;">Entrar</button>
+
+      </form>
+
+      <div style="text-align: center; margin-top: 1rem;">
+
+        <a href="#" style="font-size: 0.8rem; color: var(--primary); text-decoration: none;">Esqueci minha senha</a>
+
+      </div>
+
+      <div style="margin-top: 1.5rem; text-align: center;">
+
+         <img src="icone-animais.webp" alt="Pets felizes" style="max-width: 100%; border-radius: 10px;">
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+
+  <footer>
+
+    Desenvolvido por Danielly Reis <br>
+
+    <small>© 2026 PetShop Carinho</small>
+
+  </footer>
+
+
+
+</body>
+
+</html>
